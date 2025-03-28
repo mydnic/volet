@@ -193,7 +193,7 @@ Add this **after** the `@voletStyles` directive:
 </head>
 ```
 
-All variables are listed here : https://github.com/mydnic/laravel-feedback-v2/blob/main/resources/css/volet.css#L4
+All variables are listed here : https://github.com/mydnic/volet/blob/main/resources/css/volet.css#L4
 
 ## Creating Custom Features
 
@@ -243,7 +243,7 @@ class CustomFeature extends BaseFeature
 }
 ```
 
-You can check our FeatureMessages class for an example of how to configure your feature : https://github.com/mydnic/laravel-feedback-v2/blob/main/src/Features/FeedbackMessages.php
+You can check our FeatureMessages class for an example of how to configure your feature : https://github.com/mydnic/volet/blob/main/src/Features/FeedbackMessages.php
 
 Create a Vue component for your feature's UI:
 
