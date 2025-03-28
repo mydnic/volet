@@ -1,205 +1,393 @@
-**Due to a [stupid copyright infringement](https://twitter.com/mydnic/status/1219908154919702528) I had to rename this package.**
+# An extensible customer feedback widget for Laravel
 
-Note that nothing in the code changed (still same namespace). Only the package name has changed. Namespace might changed later in a major release.
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mydnic/volet.svg?style=flat-square)](https://packagist.org/packages/mydnic/volet)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mydnic/volet/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/mydnic/volet/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/mydnic/volet/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/mydnic/volet/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/mydnic/volet.svg?style=flat-square)](https://packagist.org/packages/mydnic/volet)
 
-# Customizable Feedback Component for Laravel
+Volet is a highly customizable customer interaction widget for Laravel applications that provides a flexible feature system. It comes with one built-in feature: feedback messages collection. But it allows you to create your own custom features.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mydnic/laravel-kustomer.svg)](https://packagist.org/packages/mydnic/laravel-kustomer)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![Build Status](https://img.shields.io/travis/com/mydnic/laravel-kustomer.svg)](https://travis-ci.com/mydnic/laravel-kustomer)
-[![Code Quality](https://img.shields.io/scrutinizer/g/mydnic/laravel-kustomer.svg)](https://scrutinizer-ci.com/g/mydnic/laravel-kustomer/)
+- 🎨 Fully customizable theme using CSS variables (or by using your own css)
+- 🧩 Extensible feature system
+- 📝 Built-in feedback message collection
+- 🎯 Simple integration with Laravel
+- 🛠️ Built with VueJS
+- 🔧 Easy to create custom features, or install community made features
 
-- [Introduction](#introduction)
-	- [Chatting System](#chatting-system)
-- [Demo](#demo)
-- [Installation & Configuration](#installation--configuration)
-	- [Configuration](#configuration)
-    - [Translations](#translations)
-    - [Display the component](#display-the-component)
-    - [Updating](#updating)
-    - [Include assets with your own assets](#include-kustomer-assets-with-your-own-assets)
-        - [Pre requisite](#pre-requisite)
-        - [Install](#install)
-- [Retrieve Feedbacks](#retrieve-feedbacks)
-    - [Nova Tool](#use-with-laravel-nova)
-- [Event, Job, Notification, etc](#event-job-notification-etc)
-- [License](#license)
+Table of contents
+=================
+
+<!--ts-->
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Quickstart](#quickstart)
+    * [Style customization](#style-customization)
+* [Creating Custom Features](#creating-custom-features)
+* [Built-in Features](#built-in-features)
+    * [Feedback Messages](#feedback-messages)
+<!--te-->
 
 ## Introduction
 
-Laravel Feedback Component allows you to easily implement a Customer Feedback component on your website. It is build with VueJS but can be implemented in any kind of Laravel Project. You just need to drop a few lines in your layout.
+Volet is an open-source widget-like component that you drop on your website to interact with your website's visitors. It's like Crisp, Zendesk, Intercom, Tawkto, etc.
 
-You probably know a lot of website that use intercom's chatting system, or crisp, chat.io and many more customer chat allowing you to get feedbacks from your website visitors.
+First this package was named Laravel Kustomer. But due to a stupid copyright infringement, I had to rename this package to 'laravel-feedback-component'.
 
-Laravel Feedback Component is an open-source and customizable alternative that adopts the same layout. Once installed, you will see the component on your website.
+After several years I finally decided to take the time to rebuild it from scratch. It's now called Volet, which means "a panel that can be opened or closed" in French.
 
-We also have a [Nova Tool](https://github.com/mydnic/nova-kustomer) for it!
+At it's core, it's simply a panel that opens up when you click the floating button. Inside that panel, you will decide what options you want to give your users. It can be a simple form, or a chatbot, or anything you want.
 
-### Chatting System
+By default, Volet comes with one built-in feature: feedback messages collection, which is a simple way for your users to send you a single message.
 
-I'll work on implementing a chatting system in Laravel Feedback Component, that will probably work with Laravel Nova. This is planned for V2. For now, you can only gather feedbacks from your visitors.
+What's great about Volet is that it's extensible. You can create custom features, or install community made features. If you want to make your own chatbot, you can integrate it to Volet! Or if someone else made one, you can install it and use it.
 
-## Demo
+This package does not come with any chat out of the box (yet ?).
 
-<img src="https://github.com/mydnic/laravel-feedback-component/blob/master/demo.gif?raw=true" alt="Laravel Feedback Component">
+## Installation
 
-## Installation & Configuration
-
-You may use Composer to Install Laravel Feedback Component:
+You can install the package via composer:
 
 ```bash
-composer require mydnic/laravel-kustomer
+composer require mydnic/volet
 ```
 
-After installing Laravel Feedback Component, publish its assets using the `kustomer:publish` Artisan command. After installing the package, you should also run the migrate command:
+Publish the assets with:
 
 ```bash
-php artisan kustomer:publish
+php artisan vendor:publish --tag="volet-assets" --force
+```
 
+You can publish and run the migrations with:
+
+```bash
+php artisan vendor:publish --tag="volet-migrations"
 php artisan migrate
 ```
 
-This will create a new **feedbacks** table.
-
-### Configuration
-
-You can update the configuration of the component as you wish by editing `config/kustomer.php`.
-
-I encourrage you to carefully read this config file.
-
-### Translations
-
-All the texts that you can see in the components are translatable. After publishing the assets, you will find the texts in *resources/lang/vendor/en/kustomer.php*
-
-The feedbacks labels are stored in this file as well, and the `feedbacks` array must match the one from you config file.
-
-### Display the component
-
-In your `public/` directory you'll find compiled css and js files that needs to be included into your html layout.
-
-Include these on the pages you want the components to appear :
-
-```blade
-<head>
-    <script src="{{ asset('vendor/kustomer/js/kustomer.js') }}" defer></script>
-</head>
-<body>
-    @include('kustomer::kustomer')
-</body>
-```
-
-> **Attention** If you run a VueJS application, you must add the `#kustomer` container outside your `#app` container. This is because kustomer runs on its own vue instance by default. If you want to change that, see [Include assets with your own assets](#include-assets)
-
-### Updating
-
-When updating this package, you should re-publish the assets:
+You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag=kustomer-assets --force
+php artisan vendor:publish --tag="volet-config"
 ```
 
-This will re-publish the compiled JS and CSS files, but also the svg files located in `public/vendor/kustomer/assets`. If you want to use your own images, please update the configuration file.
+Have a quick look at `config/volet.php` and update anything you want.
 
-<a name="include-assets"></a>
-### Include assets with your own assets
+### Upgrade
 
-Optionnally, you can import the `.vue` and `.sass` files into your own `resources/js` and `resources/sass` folders, allowing you to heavily customize the Feedback Component components and layout.
+If you're upgrading from an older version, you should run:
 
-This will also allow you to end up with only one compiled `.js` and `.css` in your app.
+```bash
+php artisan vendor:publish --tag="volet-config" --force
+php artisan vendor:publish --tag="volet-assets" --force
+```
 
-However, you should be carefull if you're trying to update the a latest version, because your changes might be lost.
+Optionally, you can add this to your `composer.json` to automatically update the assets when you update the package:
 
-#### Pre requisite
-
-Two npm packages are required:
-
-- axios
-- html2canvas
-
-You can add them via npm or yarn.
-
-We are using axios to make the HTTP request to send the feedback, so make sure axios is installed an configured in your vue app.
-
-As in the Laravel scaffolding javascript, axios should be configured like so:
-
-```javascript
-window.axios = require('axios');
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-let token = document.head.querySelector('meta[name="csrf-token"]');
-
-if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+```json
+{
+    "scripts": {
+        "post-package-update": [
+            "@php artisan vendor:publish --tag=volet-assets --force"
+        ]
+    }
 }
 ```
 
-#### Install
+## Quickstart
 
-Publish the VueJS component:
+First, create a service provider to configure your Volet features. You can publish our pre-configured provider:
+
 ```bash
-php artisan vendor:publish --tag=kustomer-vue-component
+php artisan vendor:publish --tag="volet-provider"
 ```
 
-Publish the SASS style file:
-```bash
-php artisan vendor:publish --tag=kustomer-sass-component
-```
+This will create `app/Providers/VoletApplicationServiceProvider.php` with some example features already configured.
 
-Then in your vue app:
-
-```javascript
-// app.js
-Vue.component('kustomer', require('./components/Kustomer/Kustomer.vue'));
-```
-
-```scss
-// app.scss
-@import 'kustomer';
-```
-
-## Retrieve Feedbacks
-A Feedback essentially has 4 attributes:
-
-- Type : Represents the "category" of the feedback (bug, like, suggestion, etc)
-- Message : the typed message from your visitors
-- User Infos : a JSON column containing all sorts of informations about the user's request
-- Reviewed : a boolean column allowing to mark a feedback as "reviewed"
-
-Once a Feedback is stored in your database, you can use your own backoffice to display and manipulate the datas.
-
-The Feedback model works like any other Eloquent model so it's very easy to use in your Laravel Application.
-
-Using Laravel Nova ? No problem !
-
-### Use With Laravel Nova
-
-If you're using Laravel Nova you will certainly want a tool to visualize all feedbacks that you have received.
-
-You can install the official [Laravel Nova Tool here](https://github.com/mydnic/nova-kustomer).
-
-## Event, Job, Notification, etc
-
-When a new feedback is correctly stored, we will dispatch a Laravel Event.
-
-You can listen to this event and trigger any kind of listeners. It's up to you to decide what happens next! You can send an email to the administrator, log some data, or whatever you can think about.
-
-In your `EventServiceProvider` you can update the `$listen` property to add the Event.
+Register your new service provider in `bootstrap/providers.php` (if you're using Laravel 12 or above):
 
 ```php
-protected $listen = [
-    'Mydnic\Kustomer\Events\NewFeedback' => [
-        'App\Listeners\YourOwnListener', // change this
-    ],
-
+return [
     // ...
+    App\Providers\VoletApplicationServiceProvider::class,
 ];
 ```
 
+In your `VoletApplicationServiceProvider`, register and configure your features:
+
+```php
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Mydnic\Volet\Features\FeedbackMessages;
+use Mydnic\Volet\Features\FeatureManager;
+
+class VoletApplicationServiceProvider extends ServiceProvider
+{
+    public function boot(FeatureManager $volet): void
+    {
+        // Register and configure the Feedback Messages feature
+        $this->registerFeedbackMessagesFeature($volet);
+
+        // Example of registering a custom feature
+        // $volet->register(new YourCustomFeature());
+    }
+
+    private function registerFeedbackMessagesFeature(FeatureManager $volet): void
+    {
+        $volet->register(
+            (new FeedbackMessages)
+                // Configure feature display
+                ->setLabel('Send us feedback')
+                ->setIcon('https://api.iconify.design/lucide:message-square.svg?color=%23888888')
+
+                // Add feedback categories
+                ->addCategory(
+                    slug: 'general',
+                    name: 'General Feedback',
+                    icon: 'https://api.iconify.design/lucide:smile.svg?color=%23888888'
+                )
+                ->addCategory(
+                    slug: 'improvement',
+                    name: 'Improvement',
+                    icon: 'https://api.iconify.design/lucide:lightbulb.svg?color=%23888888'
+                )
+                ->addCategory(
+                    slug: 'bug',
+                    name: 'Bug Report',
+                    icon: 'https://api.iconify.design/lucide:bug.svg?color=%23888888'
+                )
+        );
+    }
+}
+```
+
+Then add the Volet component to your blade view:
+
+In the `<head>` section:
+```blade
+    @voletStyles <!-- skip this if you are using your own CSS theme -->
+</head>
+```
+
+Right before the closing body tag:
+```blade
+    @volet
+</body>
+```
+
+If you are planning to use your own CSS theme, you can skip adding the `@voletStyles` directive and add your own CSS file to your `<head>` section.
+
+### Style customization
+
+Volet's default style uses CSS variables for styling. So you can already set your own variables to customize the look and feel of your Volet app.
+
+Add this **after** the `@voletStyles` directive:
+
+```blade
+    @voletStyles
+    <style>
+        :root {
+            --volet-background: #FF2D20;
+        }
+    </style>
+</head>
+```
+
+All variables are listed here : https://github.com/mydnic/laravel-feedback-v2/blob/main/resources/css/volet.css#L4
+
+## Creating Custom Features
+
+You can create your own features by extending the `BaseFeature` class:
+
+```php
+namespace App\Volet\Features;
+
+use Mydnic\Volet\Features\BaseFeature;
+
+class CustomFeature extends BaseFeature
+{
+    public function getId(): string
+    {
+        return 'custom-chatbot';
+    }
+    
+    public function getLabel(): string
+    {
+        return 'Talk with our chatbot';
+    }
+    
+    public function getIcon(): string
+    {
+        return 'https://api.iconify.design/lucide:star.svg?color=%23888888';
+    }
+    
+    public function getVueComponent(): ?string
+    {
+        return 'CustomFeatureComponent'; // Name of your Vue component
+    }
+    
+    public function getConfig(): array
+    {
+        return [
+            'routes' => [
+                'store' => route('custom-feature.store'),
+            ],
+            'labels' => [
+                'placeholder' => 'Enter your message...',
+                'button' => 'Submit',
+                'success' => 'Thank you!',
+            ],
+            // Add any other configuration your component needs
+        ];
+    }
+}
+```
+
+You can check our FeatureMessages class for an example of how to configure your feature : https://github.com/mydnic/laravel-feedback-v2/blob/main/src/Features/FeedbackMessages.php
+
+Create a Vue component for your feature's UI:
+
+```html
+<!-- resources/js/components/CustomFeatureComponent.vue -->
+<template>
+    <div class="volet-custom-feature">
+        <button class="volet-custom-button">
+            Click me
+        </button>
+    </div>
+</template>
+
+<script setup>
+defineProps({
+    config: {
+        type: Object,
+        required: true,
+    },
+})
+</script>
+
+<style>
+.my-feature-wrapper {
+    padding: var(--volet-spacing);
+}
+
+.my-feature-button {
+    background-color: var(--volet-primary);
+    color: var(--volet-background);
+    padding: calc(var(--volet-spacing) * 0.5);
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+}
+
+.my-feature-button:hover {
+    background-color: var(--volet-primary-hover);
+}
+</style>
+```
+
+You can of course use tailwindcss or any other CSS framework to style your component.
+
+Then you must register your component with Volet.
+
+```js
+// resources/js/my-custom-feature.js or similar
+import CustomFeatureComponent from "./components/CustomFeatureComponent.vue";
+
+function registerComponent() {
+    if (window.Volet) {
+        window.Volet.component('CustomFeatureComponent', CustomFeatureComponent);
+    }
+}
+
+// Register once the DOM is ready
+document.addEventListener("DOMContentLoaded", registerComponent);
+```
+
+Compile your javascript and include it after the `@volet` directive:
+
+```blade
+    @volet
+    @vite('resources/js/my-custom-feature.js')
+</body>
+```
+
+## Built-in Features
+
+### Feedback Messages
+
+The feedback messages feature allows users to submit feedback in different categories. Configure the table name in your `config/volet.php`:
+
+```php
+return [
+    'feedback-messages' => [
+        'table' => 'custom_feedback_table', // Default: 'volet_feedback_messages'
+        
+        // ...
+    ],
+];
+```
+
+Configure the feature in your `VoletApplicationServiceProvider`:
+
+```php
+use Mydnic\Volet\Features\FeedbackMessages;
+
+$volet->register(
+    (new FeedbackMessages())
+        // Configure feature display
+        ->setLabel('Send us feedback')
+        ->setIcon('https://api.iconify.design/lucide:message-square.svg?color=%23888888')
+        
+        // Add feedback categories
+        ->addCategory(
+            slug: 'bug',
+            name: 'Bug Report',
+            icon: 'https://api.iconify.design/lucide:bug.svg?color=%23888888'
+        )
+        ->addCategory(
+            slug: 'improvement',
+            name: 'Improvement',
+            icon: 'https://api.iconify.design/lucide:lightbulb.svg?color=%23888888'
+        )
+);
+```
+
+You can enable/disable the feature:
+```php
+(new FeedbackMessages())->disable(); // or ->enable()
+```
+
+Or use conditional configuration:
+```php
+(new FeedbackMessages())
+    ->when(app()->isProduction(), fn ($f) => $f
+        ->addCategory('bug', 'Production Bug Report', 'icon-url')
+    );
+```
+
+## Testing
+
+```bash
+composer test
+```
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Security Vulnerabilities
+
+Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+
+## Credits
+
+- [Clément Rigo](https://github.com/mydnic)
+- [All Contributors](../../contributors)
+
 ## License
 
-Laravel Kustomer is an open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
-
-In this project you will find some [svg icons](https://github.com/mydnic/laravel-kustomer/tree/master/public/assets) that come from [FlatIcon](https://www.flaticon.com). You're free to change them in your own project.
-
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

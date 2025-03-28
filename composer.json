@@ -1,46 +1,72 @@
 {
-    "name": "mydnic/laravel-feedback-component",
-    "description": "Open Source Feedback Interface for Laravel",
+    "name": "mydnic/volet",
+    "description": "A fully featured feedback component for Laravel, gather user feedbacks, chat, etc",
     "keywords": [
-        "laravel",
-        "customer",
-        "feedback"
+        "Mydnic",
+        "volet",
+        "laravel-volet"
     ],
+    "homepage": "https://github.com/mydnic/volet",
     "license": "MIT",
-    "homepage": "https://github.com/mydnic/laravel-feedback-component",
     "authors": [
         {
             "name": "Clément Rigo",
-            "email": "rigoclement@mydnic.be"
+            "email": "rigoclement@mydnic.be",
+            "role": "Developer"
         }
     ],
     "require": {
-        "php": ">=8.0",
-        "laravel/framework": "^7.0|^8.0|^9.0|^10.0|^11.0|^12.0"
+        "php": "^8.3",
+        "spatie/laravel-package-tools": "^1.16",
+        "illuminate/contracts": "^10.0||^11.0||^12.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5|^10.5|^11.5.3",
-        "orchestra/testbench": "^3.7.8|^9.0|^10.0",
-        "mockery/mockery": "^1.3"
+        "laravel/pint": "^1.14",
+        "nunomaduro/collision": "^8.1.1||^7.10.0",
+        "orchestra/testbench": "^9.0.0||^8.22.0",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-arch": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0"
     },
     "autoload": {
         "psr-4": {
-            "Mydnic\\Kustomer\\": "src/"
+            "Mydnic\\Volet\\": "src/",
+            "Mydnic\\Volet\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mydnic\\Kustomer\\Test\\": "tests"
+            "Mydnic\\Volet\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php ./vendor/bin/testbench package:discover --ansi"
+        ],
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Mydnic\\Kustomer\\KustomerServiceProvider"
-            ]
+                "Mydnic\\Volet\\VoletServiceProvider"
+            ],
+            "aliases": {
+                "Volet": "Mydnic\\Volet\\Facades\\Volet"
+            }
         }
     },
-    "scripts": {
-        "test": "vendor/bin/phpunit"
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
