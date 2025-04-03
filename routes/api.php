@@ -8,7 +8,6 @@ Route::prefix('volet')->group(function () {
     Route::prefix(config('volet.feedback-messages.routes.prefix'))
         ->middleware(config('volet.feedback-messages.routes.middleware'))
         ->group(function () {
-            Route::post('/', [config('volet.feedback-messages.controller'), 'store'])
-                ->name('volet.api.store');
+            Route::post('/', [config('volet.feedback-messages.controller'), 'store']);
         });
 });
