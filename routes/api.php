@@ -9,6 +9,6 @@ Route::prefix('volet')->group(function () {
         ->middleware(config('volet.feedback-messages.routes.middleware'))
         ->group(function () {
             Route::post('/', [config('volet.feedback-messages.controller'), 'store'])
-                ->name('volet.api.store');
+                ->name('volet.feedback-messages.store');
         });
 });

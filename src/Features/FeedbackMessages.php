@@ -43,7 +43,7 @@ class FeedbackMessages extends BaseFeature
         return [
             'categories' => $this->categories,
             'routes' => [
-                'store' => route('volet.api.store'),
+                'store' => route('volet.feedback-messages.store'),
             ],
             'labels' => trans('volet::volet.feedback-messages'),
             'content' => config('volet.feedback-messages.content'),
