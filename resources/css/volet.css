@@ -26,49 +26,6 @@
     --volet-line-height: 1.5;
 }
 
-/* CSS Reset for Volet */
-#volet, #volet * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--volet-font-family);
-    font-size: var(--volet-font-size);
-    line-height: var(--volet-line-height);
-    border: none;
-    outline: none;
-}
-
-#volet button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font: inherit;
-    color: inherit;
-}
-
-#volet button:focus {
-    outline: 2px solid var(--volet-primary);
-    outline-offset: 2px;
-}
-
-#volet input,
-#volet textarea {
-    font-family: var(--volet-font-family);
-    font-size: var(--volet-font-size);
-    line-height: var(--volet-line-height);
-    padding: 0.5rem;
-    border: 1px solid rgb(209 213 219);
-    border-radius: 0.375rem;
-    width: 100%;
-}
-
-#volet input:focus,
-#volet textarea:focus {
-    outline: 2px solid var(--volet-primary);
-    outline-offset: 2px;
-    border-color: var(--volet-primary);
-}
 
 #volet .sr-only {
     position: absolute;
@@ -103,6 +60,10 @@
     transition-property: color, background-color, transform;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
 }
 
 #volet .volet-bubble:hover {
@@ -135,6 +96,7 @@
     background-color: var(--volet-background);
     color: var(--volet-text);
     font-size: 0.875rem;
+    font-family: var(--volet-font-family);
     white-space: nowrap;
     box-shadow: var(--volet-shadow);
     opacity: 0;
@@ -186,6 +148,10 @@
 #volet .volet-panel-title {
     color: var(--volet-header-text);
     font-weight: 300;
+    padding: 0;
+    margin: 0;
+    font-size: var(--volet-font-size);
+    font-family: var(--volet-font-family);
 }
 
 #volet .volet-panel-close {
@@ -195,6 +161,11 @@
     transition-property: color, transform;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
 }
 
 #volet .volet-panel-close:hover {
@@ -216,6 +187,11 @@
     align-items: center;
     color: var(--volet-header-text);
     gap: calc(var(--volet-spacing) * 0.75);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: var(--volet-font-family);
 }
 
 #volet .volet-panel-header-back-icon {
@@ -226,6 +202,10 @@
 #volet .volet-panel-header-feature-title {
     color: var(--volet-header-text);
     font-weight: 500;
+    padding: 0;
+    margin: 0;
+    font-size: var(--volet-font-size);
+    font-family: var(--volet-font-family);
 }
 
 /* Panel Content */
@@ -287,6 +267,8 @@
     color: var(--volet-text);
     background-color: var(--volet-background);
     transition: background-color 150ms;
+    border: none;
+    cursor: pointer;
 }
 
 #volet .volet-feature-button:hover {
@@ -317,6 +299,11 @@
     gap: calc(var(--volet-spacing) * 0.5);
     color: var(--volet-text);
     transition: color 150ms;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
 }
 
 #volet .volet-feedback-back:hover {
@@ -347,6 +334,8 @@
     color: var(--volet-text);
     background-color: var(--volet-background);
     transition: background-color 150ms;
+    border: none;
+    cursor: pointer;
 }
 
 #volet .volet-feedback-category:hover {
@@ -373,8 +362,7 @@
 }
 
 #volet .volet-feedback-selected-category {
-    border-bottom: 1px solid rgb(229 231 235);
-    padding-bottom: var(--volet-spacing);
+
 }
 
 #volet .volet-feedback-change-category {
@@ -382,9 +370,13 @@
     align-items: center;
     gap: calc(var(--volet-spacing) * 0.5);
     font-size: 0.875rem;
+    background: none;
     font-weight: 500;
     color: var(--volet-text);
     transition: color 150ms;
+    width: 100%;
+    border: none;
+    cursor: pointer;
 }
 
 #volet .volet-feedback-change-category:hover {
@@ -402,12 +394,15 @@
 
 #volet .volet-feedback-textarea {
     width: 100%;
+    max-width: 100%;
     border: 1px solid rgb(209 213 219);
     border-radius: 0.375rem;
     padding: 0.75rem;
     font-size: 0.875rem;
     color: var(--volet-text);
+    box-sizing: border-box;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    font-family: var(--volet-font-family);
 }
 
 #volet .volet-feedback-textarea:focus {
@@ -435,6 +430,9 @@
     color: var(--volet-background);
     background-color: var(--volet-primary);
     border-radius: 0.375rem;
+    font-family: var(--volet-font-family);
+    border: none;
+    cursor: pointer;
     transition: background-color 150ms;
 }
 
@@ -454,6 +452,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: var(--volet-font-family);
     justify-content: center;
     gap: var(--volet-spacing);
     padding: calc(var(--volet-spacing) * 2);
@@ -468,19 +467,26 @@
 
 #volet .volet-feedback-success h4 {
     font-size: 1.25rem;
+    font-family: var(--volet-font-family);
+    margin: 0;
     color: var(--volet-text);
     font-weight: 500;
 }
 
 #volet .volet-feedback-success p {
     color: var(--volet-text);
+    font-family: var(--volet-font-family);
 }
 
 #volet .volet-feedback-reset {
     margin-top: var(--volet-spacing);
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
+    border: none;
+    background: none;
+    font-family: var(--volet-font-family);
     font-weight: 500;
+    cursor: pointer;
     color: var(--volet-primary);
     transition: color 150ms;
 }
