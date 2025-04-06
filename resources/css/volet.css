@@ -46,6 +46,20 @@
     right: var(--volet-spacing);
 }
 
+/* Button */
+#volet .volet-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--volet-background);
+    background-color: var(--volet-primary);
+    border-radius: 0.375rem;
+    font-family: var(--volet-font-family);
+    border: none;
+    cursor: pointer;
+    transition: background-color 150ms;
+}
+
 /* Chat bubble button */
 #volet .volet-bubble {
     height: var(--volet-bubble-size);
@@ -421,19 +435,6 @@
     font-size: 0.875rem;
     color: rgb(220 38 38);
     margin-bottom: calc(var(--volet-spacing) * 0.5);
-}
-
-#volet .volet-feedback-submit {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--volet-background);
-    background-color: var(--volet-primary);
-    border-radius: 0.375rem;
-    font-family: var(--volet-font-family);
-    border: none;
-    cursor: pointer;
-    transition: background-color 150ms;
 }
 
 #volet .volet-feedback-submit:hover {

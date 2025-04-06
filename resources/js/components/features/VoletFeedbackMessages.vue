@@ -53,7 +53,7 @@
                 </p>
                 <button
                     type="submit"
-                    class="volet-feedback-submit"
+                    class="volet-button"
                     :disabled="isSubmitting"
                 >
                     <span v-if="isSubmitting">{{ props.labels?.['button-loading'] || 'Sending...' }}</span>
