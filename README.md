@@ -365,6 +365,36 @@ Or use conditional configuration:
     );
 ```
 
+#### Notifications
+
+You can easily use Laravel model's events to send notifications when a new feedback message is submitted:
+
+```php
+namespace App\Observers;
+
+use Mydnic\Volet\Models\FeedbackMessage;
+use App\Notifications\NewFeedbackMessageNotification;
+use Illuminate\Support\Facades\Notification;
+
+class FeedbackMessageObserver
+{
+    public function created(FeedbackMessage $feedbackMessage)
+    {
+        // Send notification to administrators
+        Notification::route('mail', 'admin@example.com')
+            ->notify(new NewFeedbackMessageNotification($feedbackMessage));
+    }
+}
+```
+
+```php
+// Register the observer in your AppServiceProvider
+public function boot()
+{
+    FeedbackMessage::observe(FeedbackMessageObserver::class);
+}
+```
+
 ## Testing
 
 ```bash
