@@ -285,6 +285,9 @@ defineProps({
 </style>
 ```
 
+> [!IMPORTANT]
+> You MUST use Composition API with <script setup> for your components to work with Volet.
+
 You can of course use tailwindcss or any other CSS framework to style your component.
 
 Then you must register your component with Volet.
@@ -302,6 +305,9 @@ function registerComponent() {
 // Register once the DOM is ready
 document.addEventListener("DOMContentLoaded", registerComponent);
 ```
+
+> [!IMPORTANT]
+> If you split your code into multiple VueJS components, you must **register them all**.
 
 Compile your javascript and include it after the `@volet` directive:
 
