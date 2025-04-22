@@ -45,6 +45,10 @@ Volet is build using VueJS, but is meant to render any **Web Component**. So you
 
 This package does not come with any chat out of the box (yet ?).
 
+## Demo
+
+![Demo of Volet Panel](demo.gif)
+
 ## Installation
 
 You can install the package via composer:
