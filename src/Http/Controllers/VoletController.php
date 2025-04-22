@@ -19,7 +19,7 @@ class VoletController
                     'id' => $feature->getId(),
                     'label' => $feature->getLabel(),
                     'icon' => $feature->getIcon(),
-                    'component' => $feature->getVueComponent(),
+                    'component' => $feature->getComponentName(),
                     'config' => $feature->getConfig(),
                 ])
                 ->values()

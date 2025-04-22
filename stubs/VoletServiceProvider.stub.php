@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Mydnic\Volet\Features\FeatureManager;
 use Mydnic\Volet\Features\FeedbackMessages;
 
-class VoletApplicationServiceProvider extends ServiceProvider
+class VoletServiceProvider extends ServiceProvider
 {
     public function boot(FeatureManager $volet): void
     {

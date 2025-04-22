@@ -1,16 +1,15 @@
 import { createApp } from 'vue'
-import Volet from './components/Volet.vue'
+
 import VoletFeedbackMessages from './components/features/VoletFeedbackMessages.vue'
+import Volet from './components/Volet.vue'
 
-// Create the Volet app
-const app = createApp(Volet)
+async function bootstrap() {
+    const app = createApp(Volet)
 
-// Expose global registration method
-window.Volet = app
+    app.component('VoletFeedbackMessages', VoletFeedbackMessages)
 
-// Register built-in components
-app.component('VoletFeedbackMessages', VoletFeedbackMessages)
+    window.Volet = app
+    app.mount('#volet')
+}
 
-// Mount the app
-app.mount('#volet')
-
+bootstrap()

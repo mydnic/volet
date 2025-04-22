@@ -52,10 +52,13 @@
                 </div>
 
                 <!-- Feature Component Container -->
-                <component
-                    v-if="activeFeature"
-                    :is="activeFeature.component"
+                <VoletFeedbackMessages
+                    v-if="activeFeature?.component === 'VoletFeedbackMessages'"
                     v-bind="activeFeature.config"
+                />
+                <VoletFeatureHost
+                    v-else-if="activeFeature"
+                    :active-feature="activeFeature"
                     @close="closeFeature"
                 />
             </div>
@@ -66,6 +69,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import VoletFeedbackMessages from "./features/VoletFeedbackMessages.vue";
+import VoletFeatureHost from "./VoletFeatureHost.vue";
 
 const props = defineProps({
     labels: {

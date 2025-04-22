@@ -4,6 +4,7 @@ namespace Mydnic\Volet;
 
 use Illuminate\Support\Facades\Blade;
 use Mydnic\Volet\Commands\VoletCommand;
+use Mydnic\Volet\Features\Feature;
 use Mydnic\Volet\Features\FeatureManager;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -58,11 +59,25 @@ class VoletServiceProvider extends PackageServiceProvider
             $icon = htmlspecialchars(config('volet.icon'));
             $labels = htmlspecialchars(json_encode(trans('volet::volet')));
 
-            return "<?php echo '<div
+            $scripts = $this->app->make(FeatureManager::class)->getEnabledFeatures()
+                ->map(function (Feature $feature) {
+                    return $feature->getScripts();
+                })
+                ->values()
+                ->filter()
+                ->join("\n");
+
+            $output = "<?php echo '<div
                 id=\"volet\"
                 data-icon=\"{$icon}\"
                 data-labels=\"{$labels}\"
-                ></div>'.PHP_EOL.'<script src=\"{$scriptUrl}\"></script>'; ?>";
+                ></div>'; ?>";
+
+            $output .= "<?php echo '<script src=\"{$scriptUrl}\"></script>'; ?>";
+
+            $output .= $scripts;
+
+            return $output;
         });
 
         if ($this->app->runningInConsole()) {
@@ -71,7 +86,7 @@ class VoletServiceProvider extends PackageServiceProvider
             ], 'volet-assets');
 
             $this->publishes([
-                __DIR__.'/../stubs/VoletApplicationServiceProvider.stub.php' => app_path('Providers/VoletApplicationServiceProvider.php'),
+                __DIR__.'/../stubs/VoletServiceProvider.stub.php' => app_path('Providers/VoletServiceProvider.php'),
             ], 'volet-provider');
         }
     }

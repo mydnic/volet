@@ -39,7 +39,9 @@ At it's core, it's simply a panel that opens up when you click the floating butt
 
 By default, Volet comes with one built-in feature: feedback messages collection, which is a simple way for your users to send you a single message.
 
-What's great about Volet is that it's extensible. You can create custom features, or install community made features. If you want to make your own chatbot, you can integrate it to Volet! Or if someone else made one, you can install it and use it.
+What's great about Volet is that it's **extensible**. You can create custom features, or install community made features. If you want to make your own chatbot, you can integrate it to Volet! Or if someone else made one, you can install it and use it.
+
+Volet is build using VueJS, but is meant to render any **Web Component**. So you can build your own Web Component (super easy with vuejs, btw), and implement them in Volet. Examples below.
 
 This package does not come with any chat out of the box (yet ?).
 
@@ -101,18 +103,18 @@ First, create a service provider to configure your Volet features. You can publi
 php artisan vendor:publish --tag="volet-provider"
 ```
 
-This will create `app/Providers/VoletApplicationServiceProvider.php` with some example features already configured.
+This will create `app/Providers/VoletServiceProvider.php` with some example features already configured.
 
 Register your new service provider in `bootstrap/providers.php` (if you're using Laravel 12 or above):
 
 ```php
 return [
     // ...
-    App\Providers\VoletApplicationServiceProvider::class,
+    App\Providers\VoletServiceProvider::class,
 ];
 ```
 
-In your `VoletApplicationServiceProvider`, register and configure your features:
+In your `VoletServiceProvider`, register and configure your features:
 
 ```php
 namespace App\Providers;
@@ -121,7 +123,7 @@ use Illuminate\Support\ServiceProvider;
 use Mydnic\Volet\Features\FeedbackMessages;
 use Mydnic\Volet\Features\FeatureManager;
 
-class VoletApplicationServiceProvider extends ServiceProvider
+class VoletServiceProvider extends ServiceProvider
 {
     public function boot(FeatureManager $volet): void
     {
@@ -160,6 +162,8 @@ class VoletApplicationServiceProvider extends ServiceProvider
     }
 }
 ```
+
+What's great with this configuration approach is that you can easily add or remove features, based on your needs, for example enable or disable a feature for a specific type of users.
 
 Then add the Volet component to your blade view:
 
@@ -221,9 +225,15 @@ class CustomFeature extends BaseFeature
         return 'https://api.iconify.design/lucide:star.svg?color=%23888888';
     }
     
-    public function getVueComponent(): ?string
+    public function getComponentName(): ?string
     {
-        return 'CustomFeatureComponent'; // Name of your Vue component
+        return 'custom-feature'; // Name of your Web Component
+    }
+    
+    public function getScripts(): ?string
+    {
+        $scriptUrl = asset('volet-custom-feature.js');
+        return "<script src=\"{$scriptUrl}\"></script>";
     }
     
     public function getConfig(): array
@@ -243,12 +253,11 @@ class CustomFeature extends BaseFeature
 }
 ```
 
-You can check our FeatureMessages class for an example of how to configure your feature : https://github.com/mydnic/volet/blob/2.x/src/Features/FeedbackMessages.php
+Create a Web Component for your feature's UI, then compile it to a ready to use JS file.
 
-Create a Vue component for your feature's UI:
-
+Here's a simple example made with VueJS:
 ```html
-<!-- resources/js/components/CustomFeatureComponent.vue -->
+<!-- resources/js/components/CustomFeatureComponent.ce.vue -->
 <template>
     <div class="volet-custom-feature">
         <button class="volet-custom-button">
@@ -267,55 +276,56 @@ defineProps({
 </script>
 
 <style>
-.my-feature-wrapper {
-    padding: var(--volet-spacing);
-}
-
-.my-feature-button {
-    background-color: var(--volet-primary);
-    color: var(--volet-background);
-    padding: calc(var(--volet-spacing) * 0.5);
-    border-radius: 0.375rem;
-    transition: background-color 0.2s;
-}
-
-.my-feature-button:hover {
-    background-color: var(--volet-primary-hover);
-}
+/**
+ * Add your custom CSS here
+ */
 </style>
 ```
 
-> [!IMPORTANT]
-> You MUST use Composition API with <script setup> for your components to work with Volet.
+```js
+// resources/js/volet-custom-feature.js
+import { defineCustomElement } from 'vue'
+import CustomFeatureComponent from './components/CustomFeatureComponent.ce.vue'
 
-You can of course use tailwindcss or any other CSS framework to style your component.
+const Element = defineCustomElement(CustomFeatureComponent)
 
-Then you must register your component with Volet.
+customElements.define('custom-feature', Element)
+```
 
 ```js
-// resources/js/my-custom-feature.js or similar
-import CustomFeatureComponent from "./components/CustomFeatureComponent.vue";
+// vite.config.js
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
 
-function registerComponent() {
-    if (window.Volet) {
-        window.Volet.component('CustomFeatureComponent', CustomFeatureComponent);
+export default defineConfig({
+    plugins: [
+        vue({
+            template: {
+                compilerOptions: {
+                    isCustomElement: (tag) => tag.includes('custom-feature'),
+                }
+            }
+        })
+    ],
+    define: {
+        'process.env.NODE_ENV': JSON.stringify('production'),
+    },
+    build: {
+        lib: {
+            entry: resolve(__dirname, 'resources/js/volet-custom-feature.js'),
+            name: 'CustomFeature',
+            fileName: () => `volet-custom-feature.js`,
+            formats: ['iife'],
+        },
+        outDir: 'public/',
     }
-}
-
-// Register once the DOM is ready
-document.addEventListener("DOMContentLoaded", registerComponent);
+});
 ```
 
-> [!IMPORTANT]
-> If you split your code into multiple VueJS components, you must **register them all**.
+As we are working with Web Components, you can use any framework to build your component, with any CSS framework.
 
-Compile your javascript and include it after the `@volet` directive:
-
-```blade
-    @volet
-    @vite('resources/js/my-custom-feature.js')
-</body>
-```
+That's it ! Volet will automatically load your feature and display it in the panel, as long as the feature is registered and enabled.
 
 ## Built-in Features
 
@@ -333,7 +343,7 @@ return [
 ];
 ```
 
-Configure the feature in your `VoletApplicationServiceProvider`:
+Configure the feature in your `VoletServiceProvider`:
 
 ```php
 use Mydnic\Volet\Features\FeedbackMessages;

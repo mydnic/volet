@@ -18,5 +18,7 @@ interface Feature
 
     public function getConfig(): array;
 
-    public function getVueComponent(): ?string;
+    public function getComponentName(): ?string;
+
+    public function getScripts(): ?string;
 }

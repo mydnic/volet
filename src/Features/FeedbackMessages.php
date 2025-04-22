@@ -17,9 +17,14 @@ class FeedbackMessages extends BaseFeature
         return 'feedback-messages';
     }
 
-    public function getVueComponent(): ?string
+    public function getComponentName(): ?string
     {
         return 'VoletFeedbackMessages';
+    }
+
+    public function getScripts(): ?string
+    {
+        return null;
     }
 
     public function addCategory(string $slug, string $name, string $icon): static
