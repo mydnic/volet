@@ -66,7 +66,12 @@ class TestFeature implements Feature
         return [];
     }
 
-    public function getVueComponent(): ?string
+    public function getComponentName(): ?string
+    {
+        return null;
+    }
+
+    public function getScripts(): ?string
     {
         return null;
     }
