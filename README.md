@@ -1,8 +1,8 @@
 # An extensible customer feedback widget for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mydnic/volet.svg?style=flat-square)](https://packagist.org/packages/mydnic/volet)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mydnic/volet/run-tests.yml?branch=2.x&label=tests&style=flat-square)](https://github.com/mydnic/volet/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/mydnic/volet/fix-php-code-style-issues.yml?branch=2.x&label=code%20style&style=flat-square)](https://github.com/mydnic/volet/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/mydnic/volet/run-tests.yml?branch=2.x&label=tests&style=flat-square)](https://github.com/mydnic/volet/actions?query=workflow%3Arun-tests+branch%3A2.x)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/mydnic/volet/fix-php-code-style-issues.yml?branch=2.x&label=code%20style&style=flat-square)](https://github.com/mydnic/volet/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3A2.x)
 [![Total Downloads](https://img.shields.io/packagist/dt/mydnic/volet.svg?style=flat-square)](https://packagist.org/packages/mydnic/volet)
 
 Volet is a highly customizable customer interaction widget for Laravel applications that provides a flexible feature system. It comes with one built-in feature: feedback messages collection. But it allows you to create your own custom features.
