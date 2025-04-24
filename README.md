@@ -41,7 +41,7 @@ By default, Volet comes with one built-in feature: feedback messages collection,
 
 What's great about Volet is that it's **extensible**. You can create custom features, or install community made features. If you want to make your own chatbot, you can integrate it to Volet! Or if someone else made one, you can install it and use it.
 
-Volet is build using VueJS, but is meant to render any **Web Component**. So you can build your own Web Component (super easy with vuejs, btw), and implement them in Volet. Examples below.
+Volet is built using VueJS, but is meant to render any **Web Component**. So you can build your own Web Component (super easy with vuejs, btw), and implement them in Volet. [Examples below](#creating-custom-features).
 
 This package does not come with any chat out of the box (yet ?).
 
@@ -377,14 +377,6 @@ You can enable/disable the feature:
 (new FeedbackMessages())->disable(); // or ->enable()
 ```
 
-Or use conditional configuration:
-```php
-(new FeedbackMessages())
-    ->when(app()->isProduction(), fn ($f) => $f
-        ->addCategory('bug', 'Production Bug Report', 'icon-url')
-    );
-```
-
 #### Notifications
 
 You can easily use Laravel model's events to send notifications when a new feedback message is submitted:
@@ -414,6 +406,10 @@ public function boot()
     FeedbackMessage::observe(FeedbackMessageObserver::class);
 }
 ```
+
+#### Admin Panel
+
+I've made a filament plugin to easily manage the feedback messages. You can find it [here](https://github.com/mydnic/volet-feedback-messages-filament-plugin).
 
 ## Testing
 
