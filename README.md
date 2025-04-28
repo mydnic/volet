@@ -25,6 +25,7 @@ Table of contents
 * [Creating Custom Features](#creating-custom-features)
 * [Built-in Features](#built-in-features)
     * [Feedback Messages](#feedback-messages)
+* [Community Features](#community-features)
 <!--te-->
 
 ## Introduction
@@ -410,6 +411,10 @@ public function boot()
 #### Admin Panel
 
 I've made a filament plugin to easily manage the feedback messages. You can find it [here](https://github.com/mydnic/volet-feedback-messages-filament-plugin).
+
+## Community Features
+
+- [FeatureBoard (mydnic/volet-feature-board)](https://github.com/mydnic/volet-feature-board): Add a Feature Request/Feature Board to Volet 
 
 ## Testing
 
