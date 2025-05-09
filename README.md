@@ -332,6 +332,8 @@ As we are working with Web Components, you can use any framework to build your c
 
 That's it ! Volet will automatically load your feature and display it in the panel, as long as the feature is registered and enabled.
 
+Want to create a package ? Check out the skeleton here: https://github.com/mydnic/volet-feature-package-skeleton
+
 ## Built-in Features
 
 ### Feedback Messages
@@ -415,6 +417,8 @@ I've made a filament plugin to easily manage the feedback messages. You can find
 ## Community Features
 
 - [FeatureBoard (mydnic/volet-feature-board)](https://github.com/mydnic/volet-feature-board): Add a Feature Request/Feature Board to Volet 
+
+Want to create a package ? Check out the skeleton here: https://github.com/mydnic/volet-feature-package-skeleton
 
 ## Testing
 
