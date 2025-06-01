@@ -57,7 +57,7 @@
                     :disabled="isSubmitting"
                 >
                     <span v-if="isSubmitting">{{ props.labels?.['button-loading'] || 'Sending...' }}</span>
-                    <span v-else>{{ props.labels?.placeholder || 'Send feedback' }}</span>
+                    <span v-else>{{ props.labels?.button || 'Send feedback' }}</span>
                 </button>
             </div>
         </form>
