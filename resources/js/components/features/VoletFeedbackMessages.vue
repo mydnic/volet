@@ -93,6 +93,10 @@ const props = defineProps({
     content: {
         type: Object,
         required: true
+    },
+    csrfToken: {
+        type: String,
+        required: true
     }
 })
 
@@ -120,7 +124,8 @@ const submitFeedback = async () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': props.csrfToken
             },
             body: JSON.stringify({
                 category: selectedCategory.value.slug,

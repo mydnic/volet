@@ -52,6 +52,7 @@ class FeedbackMessages extends BaseFeature
             ],
             'labels' => trans('volet::volet.feedback-messages'),
             'content' => config('volet.feedback-messages.content'),
+            'csrfToken' => csrf_token(),
         ];
     }
 }
