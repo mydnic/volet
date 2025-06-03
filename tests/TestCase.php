@@ -48,7 +48,7 @@ class TestCase extends Orchestra
             'database' => ':memory:',
             'prefix' => '',
         ]);
-        
+
         // Set the application key for encryption
         $app['config']->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
     }
