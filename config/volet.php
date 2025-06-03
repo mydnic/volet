@@ -27,7 +27,7 @@ return [
 
             // The middleware to apply to feedback message routes
             'middleware' => [
-                'api',
+                'web',
                 // Add your custom middleware here
                 // 'auth',
                 // 'verified',

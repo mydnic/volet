@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
 test('it can get feature settings', function () {
-    $response = $this->getJson('/volet/settings');
+    $response = $this->get('/volet/settings');
 
     $response->assertStatus(200)
         ->assertJsonStructure([

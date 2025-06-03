@@ -6,10 +6,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-test('it can submit feedback through API', function () {
+test('it can submit feedback through web', function () {
     $this->withoutExceptionHandling();
 
-    $response = $this->postJson('/volet/feedback', [
+    $response = $this->post('/volet/feedback', [
         'category' => 'bug',
         'message' => 'Test feedback message',
         'user_info' => [
@@ -27,8 +27,8 @@ test('it can submit feedback through API', function () {
 });
 
 test('it validates required fields', function () {
-    $response = $this->postJson('/volet/feedback', []);
+    $response = $this->post('/volet/feedback', []);
 
-    $response->assertStatus(422)
-        ->assertJsonValidationErrors(['category', 'message']);
+    $response->assertStatus(302)
+        ->assertSessionHasErrors(['category', 'message']);
 });
