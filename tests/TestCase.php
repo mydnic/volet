@@ -19,7 +19,7 @@ class TestCase extends Orchestra
         $this->app['config']->set('volet.feedback-messages.controller', \Mydnic\Volet\Http\Controllers\FeedbackMessageController::class);
         $this->app['config']->set('volet.feedback-messages.routes', [
             'prefix' => 'feedback',
-            'middleware' => ['api'],
+            'middleware' => ['web'],
         ]);
 
         // Register feedback feature
@@ -48,5 +48,8 @@ class TestCase extends Orchestra
             'database' => ':memory:',
             'prefix' => '',
         ]);
+        
+        // Set the application key for encryption
+        $app['config']->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
     }
 }
