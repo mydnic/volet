@@ -49,6 +49,6 @@ return [
                 // 'admin@example.com',
             ],
             'class' => \Mydnic\Volet\Notifications\NewFeedbackMessageNotification::class,
-        ]
+        ],
     ],
 ];
