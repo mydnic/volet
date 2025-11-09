@@ -31,7 +31,6 @@ class VoletServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasRoute('api')
             ->hasMigration('create_feedback_messages_table')
-            ->hasCommand(VoletCommand::class)
             ->hasTranslations()
             ->hasAssets();
     }
