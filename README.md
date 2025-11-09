@@ -23,9 +23,7 @@ Table of contents
 * [Quickstart](#quickstart)
     * [Style customization](#style-customization)
 * [Creating Custom Features](#creating-custom-features)
-* [Built-in Features](#built-in-features)
-    * [Feedback Messages](#feedback-messages)
-* [Community Features](#community-features)
+* [Features](#features)
 <!--te-->
 
 ## Introduction
