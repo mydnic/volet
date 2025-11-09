@@ -8,9 +8,7 @@ use Mydnic\Volet\Models\FeedbackMessage;
 
 class NewFeedbackMessageNotification extends Notification
 {
-    public function __construct(public FeedbackMessage $feedbackMessage)
-    {
-    }
+    public function __construct(public FeedbackMessage $feedbackMessage) {}
 
     public function via($notifiable): array
     {
@@ -21,8 +19,8 @@ class NewFeedbackMessageNotification extends Notification
     {
         return (new MailMessage)
             ->line('[Volet] New feedback message')
-            ->line('Category: ' . $this->feedbackMessage->category)
-            ->line('Message: ' . $this->feedbackMessage->message);
+            ->line('Category: '.$this->feedbackMessage->category)
+            ->line('Message: '.$this->feedbackMessage->message);
     }
 
     public function toArray($notifiable): array

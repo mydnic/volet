@@ -3,7 +3,6 @@
 namespace Mydnic\Volet;
 
 use Illuminate\Support\Facades\Blade;
-use Mydnic\Volet\Commands\VoletCommand;
 use Mydnic\Volet\Features\Feature;
 use Mydnic\Volet\Features\FeatureManager;
 use Spatie\LaravelPackageTools\Package;
