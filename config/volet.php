@@ -37,5 +37,18 @@ return [
         'content' => [
             'success-icon' => 'https://api.iconify.design/heroicons:check-circle.svg?color=%2322c55e',
         ],
+
+        // Send a notification to the site's admin when a new feedback message is submitted
+        // If you want to send other kind of notifications (slack, etc.), you should disable this and create your
+        // own notification class and trigger it via an observer (see documentation)
+        // Also, this will only work if you use the default model.
+        'mail_notification' => [
+            'enabled' => true,
+            'send_mails_to' => [
+                // List of emails to send the notification to
+                // 'admin@example.com',
+            ],
+            'class' => \Mydnic\Volet\Notifications\NewFeedbackMessageNotification::class,
+        ],
     ],
 ];

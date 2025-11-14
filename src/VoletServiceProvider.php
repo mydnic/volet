@@ -3,7 +3,6 @@
 namespace Mydnic\Volet;
 
 use Illuminate\Support\Facades\Blade;
-use Mydnic\Volet\Commands\VoletCommand;
 use Mydnic\Volet\Features\Feature;
 use Mydnic\Volet\Features\FeatureManager;
 use Spatie\LaravelPackageTools\Package;
@@ -31,7 +30,6 @@ class VoletServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasRoute('api')
             ->hasMigration('create_feedback_messages_table')
-            ->hasCommand(VoletCommand::class)
             ->hasTranslations()
             ->hasAssets();
     }

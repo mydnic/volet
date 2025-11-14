@@ -3,6 +3,7 @@
 namespace Mydnic\Volet\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Notification;
 use Mydnic\Volet\Features\FeatureManager;
 
 class FeedbackMessage extends Model
@@ -43,6 +44,19 @@ class FeedbackMessage extends Model
         static::creating(function ($model) {
             if (! $model->status) {
                 $model->status = 'new';
+            }
+        });
+
+        static::created(function ($model) {
+            // send notification if enabled
+            if (
+                config('volet.feedback-messages.mail_notification.enabled') &&
+                count(config('volet.feedback-messages.mail_notification.send_mails_to'))
+            ) {
+                $class = config('volet.feedback-messages.mail_notification.class');
+
+                Notification::route('mail', config('volet.feedback-messages.mail_notification.send_mails_to'))
+                    ->notify(new $class($model));
             }
         });
     }
