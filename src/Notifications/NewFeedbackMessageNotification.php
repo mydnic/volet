@@ -22,9 +22,4 @@ class NewFeedbackMessageNotification extends Notification
             ->line('Category: '.$this->feedbackMessage->category)
             ->line('Message: '.$this->feedbackMessage->message);
     }
-
-    public function toArray($notifiable): array
-    {
-        return [];
-    }
 }
