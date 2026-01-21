@@ -7,7 +7,6 @@ return [
     // The icon that will be shown in the button bubble, when the panel is opened. Can be a SVG or an image URL
     'close-icon' => 'https://api.iconify.design/heroicons:x-mark.svg?color=%23FFFFFF',
 
-
     /*
     |--------------------------------------------------------------------------
     | Features Configuration
