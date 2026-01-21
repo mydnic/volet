@@ -34,11 +34,18 @@ import IconResolver from './IconResolver.vue'
 // State
 const isPanelOpen = ref(false)
 const icon = ref('')
+const defaultIcon = ref('')
+const closeIcon = ref('')
 const labels = ref({})
 
 // Methods
+const updateIconForState = () => {
+    icon.value = isPanelOpen.value && closeIcon.value ? closeIcon.value : defaultIcon.value
+}
+
 const togglePanel = () => {
     isPanelOpen.value = !isPanelOpen.value
+    updateIconForState()
 }
 
 const initializeIcon = () => {
@@ -46,9 +53,11 @@ const initializeIcon = () => {
     if (!voletElement) return
 
     const iconData = voletElement.dataset.icon
-    if (iconData) {
-        icon.value = iconData
-    }
+    const closeIconData = voletElement.dataset.closeIcon
+
+    defaultIcon.value = iconData || ''
+    closeIcon.value = closeIconData || ''
+    updateIconForState()
 }
 
 const initializeLabels = () => {
