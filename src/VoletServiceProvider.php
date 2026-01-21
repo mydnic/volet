@@ -55,6 +55,7 @@ class VoletServiceProvider extends PackageServiceProvider
         Blade::directive('volet', function () {
             $scriptUrl = asset('vendor/volet/volet-app.js');
             $icon = htmlspecialchars(config('volet.icon'));
+            $closeIcon = htmlspecialchars(config('volet.close-icon'));
             $labels = htmlspecialchars(json_encode(trans('volet::volet')));
 
             $scripts = $this->app->make(FeatureManager::class)->getEnabledFeatures()
@@ -68,6 +69,7 @@ class VoletServiceProvider extends PackageServiceProvider
             $output = "<?php echo '<div
                 id=\"volet\"
                 data-icon=\"{$icon}\"
+                data-close-icon=\"{$closeIcon}\"
                 data-labels=\"{$labels}\"
                 ></div>'; ?>";
 
