@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Mydnic\Volet\Http\Controllers\VoletController;
 
 Route::prefix('volet')->group(function () {
-    Route::get('settings', [\Mydnic\Volet\Http\Controllers\VoletController::class, 'settings'])
+    Route::get('settings', [VoletController::class, 'settings'])
         ->middleware('web');
 
     Route::prefix(config('volet.feedback-messages.routes.prefix'))

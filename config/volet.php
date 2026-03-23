@@ -1,5 +1,9 @@
 <?php
 
+use Mydnic\Volet\Http\Controllers\FeedbackMessageController;
+use Mydnic\Volet\Models\FeedbackMessage;
+use Mydnic\Volet\Notifications\NewFeedbackMessageNotification;
+
 return [
     // The icon that will be shown in the button bubble. Can be a SVG or an image URL
     'icon' => 'https://api.iconify.design/heroicons:chat-bubble-left-ellipsis.svg?color=%23FFFFFF',
@@ -19,10 +23,10 @@ return [
         'table' => 'volet_feedback_messages',
 
         // The controller class to use for feedback endpoints
-        'controller' => \Mydnic\Volet\Http\Controllers\FeedbackMessageController::class,
+        'controller' => FeedbackMessageController::class,
 
         // The model class to use for feedback messages
-        'model' => \Mydnic\Volet\Models\FeedbackMessage::class,
+        'model' => FeedbackMessage::class,
 
         'routes' => [
             // The URI prefix for feedback message routes
@@ -51,7 +55,7 @@ return [
                 // List of emails to send the notification to
                 // 'admin@example.com',
             ],
-            'class' => \Mydnic\Volet\Notifications\NewFeedbackMessageNotification::class,
+            'class' => NewFeedbackMessageNotification::class,
         ],
     ],
 ];
