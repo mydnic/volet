@@ -338,7 +338,8 @@ You can install multiple features in your Volet instance. Here's a list of avail
 
 - [FeedbackMessages (out of the box)](https://github.com/mydnic/volet/tree/2.x/docs/FeedbackMessages.md): Allows users to submit simple text messages
   - Filament Plugin : [mydnic/volet-feedback-messages-filament-plugin](https://github.com/mydnic/volet-feedback-messages-filament-plugin)
-- [FeatureBoard (mydnic/volet-feature-board)](https://github.com/mydnic/volet-feature-board): Feature Request/Feature Board 
+- [FeatureBoard (mydnic/volet-feature-board)](https://github.com/mydnic/volet-feature-board): Feature Request/Feature Board
+  - Filament Plugin : [mydnic/volet-feature-board-filament-plugin](https://github.com/mydnic/volet-feature-board-filament-plugin)
 
 Want to create a feature for Volet ? Check out the skeleton here: https://github.com/mydnic/volet-feature-package-skeleton
 
