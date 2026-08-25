@@ -8,6 +8,12 @@ export default defineConfig({
     ],
     build: {
         outDir: 'resources/dist',
+        minify: 'terser',
+        terserOptions: {
+            mangle: {
+                reserved: ['$', '_'],
+            },
+        },
         rollupOptions: {
             input: {
                 'volet-app': resolve(__dirname, 'resources/js/volet.js'),
