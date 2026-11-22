@@ -9,7 +9,7 @@ class FeedbackMessages extends BaseFeature
     public function __construct()
     {
         $this->setLabel('Send us feedback');
-        $this->setIcon('https://api.iconify.design/lucide:message-square.svg?color=%23888888');
+        $this->setIcon('https://api.iconify.design/lucide/message-square.svg?color=%23888888');
     }
 
     public function getId(): string

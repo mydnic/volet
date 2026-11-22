@@ -6,10 +6,10 @@ use Mydnic\Volet\Notifications\NewFeedbackMessageNotification;
 
 return [
     // The icon that will be shown in the button bubble. Can be a SVG or an image URL
-    'icon' => 'https://api.iconify.design/heroicons:chat-bubble-left-ellipsis.svg?color=%23FFFFFF',
+    'icon' => 'https://api.iconify.design/heroicons/chat-bubble-left-ellipsis.svg?color=%23FFFFFF',
 
     // The icon that will be shown in the button bubble, when the panel is opened. Can be a SVG or an image URL
-    'close-icon' => 'https://api.iconify.design/heroicons:x-mark.svg?color=%23FFFFFF',
+    'close-icon' => 'https://api.iconify.design/heroicons/x-mark.svg?color=%23FFFFFF',
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
         ],
 
         'content' => [
-            'success-icon' => 'https://api.iconify.design/heroicons:check-circle.svg?color=%2322c55e',
+            'success-icon' => 'https://api.iconify.design/heroicons/check-circle.svg?color=%2322c55e',
         ],
 
         // Send a notification to the site's admin when a new feedback message is submitted
