@@ -12,8 +12,22 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
+      # Replaces aglipanci/laravel-pint-action, which builds its image from
+      # docker.io/library/composer:latest. That image shipped without
+      # ext-mbstring for a week in November, so Composer refused the current
+      # Pint and installed v0.1.7 instead, which dies on an undefined
+      # mb_strimwidth(). Installing PHP ourselves pins the extension set rather
+      # than inheriting whatever an upstream image happens to ship.
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring
+          tools: pint
+          coverage: none
+
       - name: Run PHP CS Fixer with Pint
-        uses: aglipanci/laravel-pint-action@2.6
+        run: pint
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v7
